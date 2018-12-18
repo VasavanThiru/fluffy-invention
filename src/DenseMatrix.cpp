@@ -71,6 +71,7 @@ Vecteur inv_triang_inf(const DenseMatrix &T, Vecteur &y){
   Vecteur x(m);
   double S = 0;
   for(int j=0; j<m; j++){
+    S=0;
     for(int k=0; k<= j-1; k++){
       S = S+ T(j,k)*x(k);}
     x(j) = 1/T(j,j)*(y(j)-S);
