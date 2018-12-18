@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
   SparseMatrix N(5);
-  int n = 10;
+  int n = 2;
   DenseMatrix D(n);
   for(int i=0; i<n-1; i++)
   {
@@ -26,6 +26,7 @@ int main()
   Vecteur b(n);
   for(int i=0; i<n;i++){
     b(i)=1;
+
   }
 
 
@@ -35,7 +36,15 @@ int main()
   A.Solve();
   A.parametres();
 
-  //cout << "A*b = " <<  D*b << endl;
+  Vecteur y(n);
+  for(int i = 0; i<n;i++){
+    y(i) = 1;
+  }
+  Vecteur x ;
+
+  x = inv_triang_inf(D,y);
+  cout << y << endl;
+  cout << "INVERSE " << x << endl;
 
 
 }

@@ -66,7 +66,7 @@ Vecteur DenseMatrix::operator*(const Vecteur& b){
 }
 
 
-Vecteur DenseMatrix::inv_triang_inf(const DenseMatrix &T, Vecteur &y){
+Vecteur inv_triang_inf(const DenseMatrix &T, Vecteur &y){
   int m = T.size();
   Vecteur x(m);
   double S = 0;

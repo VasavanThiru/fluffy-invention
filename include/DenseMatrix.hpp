@@ -24,7 +24,9 @@ public:
   void Load(char* const filename);
   friend double Frobenius(const DenseMatrix &D);
   Vecteur operator*(const  Vecteur& b);
-  Vecteur inv_triang_inf(const DenseMatrix &T, Vecteur &y);
+
   //DenseMatrix operator +(const DenseMatrix &A, const DenseMatrix& B);
 };
+
+Vecteur inv_triang_inf(const DenseMatrix &T, Vecteur &y);
 #endif
