@@ -3,19 +3,18 @@ OBJDIR	:= obj
 SRCDIR	:= src
 BINDIR	:= bin
 
-#CC      := g++
-CC      := clang++
+CC      := g++
 VPATH	:=
 LDFLAGS :=
 LIBRARY :=
-CFLAGS  := -g -Wall -I $(INCLDIR) -std=c++98
+CFLAGS  := -g -Wall -I $(INCLDIR) -std=c++11
 
 #Source and object files (automatic)
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(subst $(SRCDIR)/,$(OBJDIR)/, $(subst .cpp,.o, $(SRCS)))
 
 # Define here your main source files separated by spaces (without suffix!)
-EXEC = fluffy
+EXEC = main
 
 #Phony = do not represent a file
 #.PHONY: all
