@@ -34,3 +34,4 @@
 # Executables' folder
 bin/*
 obj/*
+*.msh
