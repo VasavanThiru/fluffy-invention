@@ -29,4 +29,5 @@ public:
 };
 
 Vecteur inv_triang_inf(const DenseMatrix &T, Vecteur &y);
+Vecteur inv_triang_sup(const DenseMatrix &A, Vecteur &b);
 #endif

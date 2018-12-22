@@ -8,7 +8,7 @@ int main()
   DenseMatrix M(3);
   M(0, 0) = 1.;
   M(0, 1) = 2.;
-  M(0, 2) = 2.;
+  M(0, 2) = 3.;
   M(1, 0) = 0.;
   M(1, 1) = 4.;
   M(1, 2) = 5.;
@@ -17,7 +17,7 @@ int main()
   M(2, 2) = 6.;
   b(0) = 1.;
   b(1) = 1.;
-  b(2) = 1.;
+  b(2) = 6.;
   std::cout << M << std::endl;
   std::cout << b << std::endl;
   x = inv_triang_sup(M, b);

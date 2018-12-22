@@ -79,6 +79,22 @@ Vecteur inv_triang_inf(const DenseMatrix &T, Vecteur &y){
   return x;
 }
 
+Vecteur inv_triang_sup(const DenseMatrix &A, Vecteur &b){
+  int n = A.size();
+  Vecteur x(n);
+  double S = 0;
+  for(int j=0; j<n; j++){
+    S=0;
+    for(int k=j+1; k<=n ; k++){
+      S= S+ A(j,k)*x(k);}
+    x(j) = 1/A(j,j)* (b(j) -S);
+    }
+  return x;
+}
+
+
+
+
 void DenseMatrix::Load(char* const filename){
   ifstream fichiermat(filename, ios::in);
   if (fichiermat){
