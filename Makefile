@@ -8,14 +8,14 @@ CC      := clang++
 VPATH	:=
 LDFLAGS :=
 LIBRARY :=
-CFLAGS  := -g -Wall -I $(INCLDIR) -std=c++98
+CFLAGS  := -g -Wall -I $(INCLDIR) -std=c++11
 
 #Source and object files (automatic)
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(subst $(SRCDIR)/,$(OBJDIR)/, $(subst .cpp,.o, $(SRCS)))
 
 # Define here your main source files separated by spaces (without suffix!)
-EXEC = fluffy
+EXEC = test_mesh
 
 #Phony = do not represent a file
 #.PHONY: all
