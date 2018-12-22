@@ -1,0 +1,3 @@
+mesh Sh = square(20, 20, [2 * pi * x - pi, 2 * pi * y - pi]);
+plot(Sh);
+savemesh(Sh, "mesh.msh");
