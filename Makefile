@@ -14,7 +14,7 @@ SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(subst $(SRCDIR)/,$(OBJDIR)/, $(subst .cpp,.o, $(SRCS)))
 
 # Define here your main source files separated by spaces (without suffix!)
-EXEC = main test2 test3
+EXEC = main test2 test3 test4
 
 #Phony = do not represent a file
 #.PHONY: all
@@ -22,10 +22,10 @@ all : makedir $(EXEC)
 
 # For multiple binaries
 $(EXEC) : %: %.cpp $(OBJS)
-	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $^ 
+	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $^
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
-	$(CC) $(CFLAGS) -c -o $@ $< 
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 #Clean: delete every binaries and object files
 .PHONY: clean

@@ -8,6 +8,7 @@ class GaussSeidel{
 private:
   DenseMatrix A;
   Vecteur b;
+  double e;
   int n_max;
 
   Vecteur X;
@@ -17,8 +18,10 @@ private:
 public:
 
   GaussSeidel();
-
-
+  GaussSeidel(const GaussSeidel &J);
+  GaussSeidel(const DenseMatrix &A0, const Vecteur & b0, const double & e0, const int & n_max0);
+  void Solve(void);
+  void parametres(void) const;
 
 };
 #endif
