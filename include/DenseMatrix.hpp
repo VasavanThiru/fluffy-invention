@@ -24,7 +24,7 @@ public:
   void Load(char* const filename);
   friend double Frobenius(const DenseMatrix &D);
   Vecteur operator*(const  Vecteur& b);
-
+  friend double Ps(const DenseMatrix & D, Vecteur &y);
   //DenseMatrix operator +(const DenseMatrix &A, const DenseMatrix& B);
 };
 

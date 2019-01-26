@@ -111,6 +111,19 @@ void DenseMatrix::Load(char* const filename){
   }
 }
 
+double Ps(const DenseMatrix & D, Vecteur &y)
+{
+  double ps=0;
+  Vecteur Y;
+  for(int i =0; i<D.size(); i++){
+    for(int j=0; j<D.size();j++){
+      Y(i)+= D(i,j)*y(j);
+    }
+  }
+  ps = Ps(Y,y);
+  return ps;
+  }
+
 
 /*
 
