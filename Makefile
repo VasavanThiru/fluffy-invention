@@ -3,19 +3,19 @@ OBJDIR	:= obj
 SRCDIR	:= src
 BINDIR	:= bin
 
-#CC      := g++
-CC      := clang++
+CC      := g++
+#CC      := clang++
 VPATH	:=
 LDFLAGS :=
 LIBRARY :=
-CFLAGS  := -g -Wall -I $(INCLDIR) -std=c++11
+CFLAGS  := -g -Wall -I $(INCLDIR) -std=c++11 -O2
 
 #Source and object files (automatic)
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(subst $(SRCDIR)/,$(OBJDIR)/, $(subst .cpp,.o, $(SRCS)))
 
 # Define here your main source files separated by spaces (without suffix!)
-EXEC = test_mesh
+EXEC = main test_mesh
 
 #Phony = do not represent a file
 #.PHONY: all

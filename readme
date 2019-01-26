@@ -1,0 +1,5 @@
+# initial condition, no calculation
+./bin/main 1 > u.dat
+
+# final result after optimization
+./bin/main > u.dat
