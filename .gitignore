@@ -38,3 +38,7 @@ obj/*
 *.msh
 *.sw*
 *.dat
+doc/*.log
+doc/*.aux
+doc/*.pdf
+doc/readme
