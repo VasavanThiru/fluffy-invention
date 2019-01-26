@@ -1,0 +1,99 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+
+\author{One \& Two}
+\title{Surface minimale en dimension finie}
+
+\begin{document}
+\maketitle
+\newpage
+
+\section{Probl\`eme de surface minimale en dimension infinie}
+Soit $\Omega$ un sous-ensemble born\'e de $\mathbb{R}^2$ \`a fronti\`ere
+ lipschitzienne. Soit $g\in\mathcal{C}^0(\partial\Omega)$. Le probl\`eme de
+ surface minimale est le suivant:
+\begin{equation}
+\begin{cases}
+\min\limits_{u\in H^1(\Omega)}\int\limits_\Omega\sqrt{1+|\nabla u|^2}\,
+\mathrm{d}\lambda \\
+u_{|\partial\Omega}=g
+\end{cases}
+\end{equation}
+On pose:
+$$
+\forall x\in\Omega, \forall u\in H^1(\Omega), L(x, u(x), \nabla u(x))=
+\sqrt{1+|\nabla u(x)|^2}
+$$
+Et on note:
+$$
+\forall u\in H^1(\Omega), J(u)=\int\limits_\Omega L(x, u(x), \nabla u(x))
+\,\mathrm{d}\lambda
+$$
+Le probl\`eme de surface minimale est le suivant:
+\begin{equation}
+\begin{cases}
+\min\limits_{u\in H^1(\Omega)}J(u) \\
+u_{|\partial\Omega}=g
+\end{cases}
+\end{equation}
+Si la fonctionnelle $J$ admet un minimum $u$ alors pour tous $v\in H^1(\Omega)$,
+ la diff\'erentielle de $J$ verifie:
+\begin{align*}
+\langle dJ(u), v\rangle &= \int\limits_\Omega\langle dL(x, u(x), \nabla u(x)),
+v(x)\rangle\,\mathrm{d}\lambda \\
+&= \int\limits_\Omega\frac{\langle \nabla u(x), \nabla v(x)\rangle}{L(x, u(x),
+ \nabla u(x))}\,\mathrm{d}\lambda
+\end{align*}
+Et:
+$$
+\langle dJ(u), v\rangle = 0
+$$
+\newpage
+\section{Probl\`eme de surface minimale en dimension finie}
+Pour r\'esoudre le probl\`eme de surface minimal en dimension finie, on utilise
+ la m\'ethode des \'el\'ements finies.
+
+Soit $h>0$. Soient $\mathcal{T}$ une triangulation du domaine $\Omega$,
+ $\mathcal{T}_{\partial\Omega}\subset\mathcal{T}$ l'ensemble des triangles avec
+ au moins un ar\^ete faisant partie du bord de $\Omega$, $V_h$
+ l'ensemble des fonctions P1-Lagrange.
+
+On r\'esout alors le probl\`eme suivant:
+\begin{equation}
+\begin{cases}
+\min\limits_{u_h\in V_h} J(u_h) \\
+u_{|\partial\Omega}=g
+\end{cases}
+\end{equation}
+
+On indice l'ensemble des sommets par un ensemble $I$ et on indice l'ensemble des
+ sommets sur le bord par $I_{\partial\Omega}$.
+Si $u_h\in V_h$ est une solution alors pour tout $v_h\in V_h$,
+$$
+\langle dJ(u_h), v_h\rangle = 0
+$$
+Cependant $dJ$ n'est pas lin\'eaire en $u_h$, on d\'efinit alors la suite
+ $(u_n)$ de $V_h$ et on substitue $dJ$ par:
+$$
+\forall (u_{n+1}, v)\in (V_h)^2, \kappa(u_{n+1}, v)=\int\limits_\Omega
+\frac{\langle\nabla u_{n+1}(x), \nabla v(x)\rangle}{L(x, u_n(x), \nabla u_n(x))}
+\,\mathrm{d}\lambda
+$$
+
+$$
+\dots
+$$
+On r\'esout alors le syst\`eme suivant:
+$$
+\forall i\in I, \sum_{j\in I}(u_n)_j\kappa(\phi_j, \phi_i)=0
+$$
+soit,
+$$
+\forall i\in I, \sum\limits_{j\in I\setminus I_{\partial\Omega}}
+(u_n)_j\kappa(\phi_j, \phi_i)=-\sum\limits_{j\in I_{\partial\Omega}}
+g_j\kappa(\phi_j, \phi_i)
+$$
+\end{document}
+

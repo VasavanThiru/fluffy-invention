@@ -34,5 +34,7 @@
 # Executables' folder
 bin/*
 obj/*
+
 *.msh
 *.sw*
+*.dat
