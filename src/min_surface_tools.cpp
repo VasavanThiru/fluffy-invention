@@ -10,7 +10,8 @@ void on_one_tri
 )
 {
     int i, j;
-    Eigen::Matrix<double, 2, 1> u, v, n[3];
+    Eigen::Matrix<double, 2, 1> n[3];
+    Eigen::Matrix<double, 3, 1> u, v;
     Eigen::Matrix<double, 2, 1> c_0;
     Eigen::Matrix<double, 2, 1> c_1;
 
@@ -33,8 +34,10 @@ void on_one_tri
     //for(int k = 0; k < 3; k++)
     //    std::cout << "n_" << k << ": \n" << n[k] << std::endl;
 
-    u = (m.coordinate(t[1]) - m.coordinate(t[0])).matrix();
-    v = (m.coordinate(t[2]) - m.coordinate(t[0])).matrix();
+    u.block<2, 1>(0, 0) = (m.coordinate(t[1]) - m.coordinate(t[0])).matrix();
+    v.block<2, 1>(0, 0) = (m.coordinate(t[2]) - m.coordinate(t[0])).matrix();
+    u(2) = u_0(t[1]) - u_0(t[0]);
+    v(2) = u_0(t[2]) - u_0(t[0]);
 
     double area = std::abs(u(0) * v(1) - u(1) * v(0));
 
@@ -42,14 +45,10 @@ void on_one_tri
         for(i = 0; i < 3; i++)
             r(i, j) = n[j].dot(n[i]);
     double s = 0.;
-    for(j = 0; j < 3; j++) {
-        s += u_0(t[j]) * u_0(t[j]) * r(j, j);
-        for(i = j + 1; i < 3; i++)
-            s += 2. * u_0(t[j]) * u_0(t[i]) * r(j, i);
-    }
-    s = std::sqrt(1. + s);
+    double a0 = std::abs(u(0) * v(2) - v(0) * u(2));
+    double a1 = std::abs(u(1) * v(2) - v(1) * u(2));
+    s = std::sqrt(area * area + a0 * a0 + a1 * a1);
     r /= s;
-    r /= (4. * area);
 }
 
 // Product of the matrix and x, the result is stored in r
@@ -110,7 +109,8 @@ int mst_conjugated_gradient
         std::cout << "p" << std::endl;
         std::cout << p << " " << p.norm() << std::endl;
         // */
-        prod(t, p, u_0, m, on_boundary, false); // t = A*p
+        //prod(t, p, u_0, m, on_boundary, false); // t = A*p
+        prod(t, p, u_0, m, on_boundary, true); // t = A*p
         beta = r.squaredNorm();
         alpha = beta / p.dot(t);
         u -= alpha * p;
