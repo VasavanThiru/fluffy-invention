@@ -7,6 +7,7 @@ import math
 import numpy as np
 import numpy.linalg as LA
 import matplotlib
+from matplotlib import cm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -45,7 +46,8 @@ def surface(x, y, z, tri):
     #plt.colorbar()
     ax = fig.gca(projection='3d')
     for a in z:
-        ax.plot_trisurf(x, y, tri, a)
+        surf = ax.plot_trisurf(x, y, tri, a, cmap=cm.coolwarm)
+    fig.colorbar(surf, shrink=0.5, aspect=5)
     plt.title('Plotting a function')
     plt.show()
 

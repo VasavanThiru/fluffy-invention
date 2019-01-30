@@ -18,10 +18,10 @@ double g(double x, double y)
         r = 0.;
     return r;
     // */
-    return std::cos(x) * std::cos(y);
+    //return std::cos(x) * std::cos(y);
     //return M_PI * std::sin(1. * x) + M_PI * std::sin(1. * y);
     //return 1.;
-    /*
+    //*
     if(x * x + y * y < 1.5 * 1.5)
         return 0.;
     else
@@ -58,23 +58,15 @@ int main(int argc, char *argv[])
     while(!initial && k < kiter && (u_0 - u).norm() >= eps) {
         u_0 = u;
         l = mst_conjugated_gradient(u, u_0, kiter, 1e-9, m, on_boundary); // u = A^(-1)g
-        prod(r, u, u_0, m, on_boundary, true); // r = A*u-b
-        //std::cout << "k " << k << " " << l << " " << r.norm() << " "
-        //    << (u_0 - u).norm() << std::endl;
+        //prod(r, u, u, m, on_boundary, true); // r = A*u-b
+        //std::cout << k << " " << l << " " << (u_0 - u).norm() << std::endl;
+        std::cout << "Iteration " << k << std::endl
+            << "Conjugate gradient's iteration " << l << std::endl
+            //<< "" << r.norm() << " "
+            << "Consecutive error " << (u_0 - u).norm() << std::endl;
         k++;
     }
 
-    //* Print for gnuplot
-    for(k = 0; k < num_cor; k++)
-        std::cout << m.coordinate(k) << " " << u(k) << std::endl;
-    // */
-    /* Print for the Python script
-    std::cout << m.vertices_count() << " " << m.triangles_count() << std::endl;
-    for(k = 0; k < m.vertices_count(); k++)
-        std::cout << m.coordinate(k) << " " << u(k) << std::endl;
-    for(k = 0; k < m.triangles_count(); k++)
-        std::cout << m.triangle(k) << std::endl;
-    // */
     return 0;
 }
 
