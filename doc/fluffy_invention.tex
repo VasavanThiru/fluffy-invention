@@ -1,20 +1,36 @@
 \documentclass[a4paper, 11pt]{article}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{indentfirst}
+\usepackage{subfig}
+\hypersetup{colorlinks=true, linkcolor=blue}
 
+\title{
+Projet MPE, Master 2, UPMC, C++ \\
+Surface minimale en dimension finie
+}
 \author{One \& Two}
-\title{Surface minimale en dimension finie}
 
 \begin{document}
 \maketitle
 \newpage
+\protect\hypertarget{table}{}
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\newpage
+\newpage
+
+\section{Introduction}
+Nous allons d\'eterminer une surface minimale en dimension finie.
 
 \section{Probl\`eme de surface minimale en dimension infinie}
 Soit $\Omega$ un sous-ensemble born\'e de $\mathbb{R}^2$ \`a fronti\`ere
  lipschitzienne. Soit $g\in\mathcal{C}^0(\partial\Omega)$. Le probl\`eme de
- surface minimale est le suivant:
+ surface minimale est le suivant: \\
+
+Trouver $u\in H^1(\Omega)$ tel que:
 \begin{equation}
 \begin{cases}
 \min\limits_{u\in H^1(\Omega)}\int\limits_\Omega\sqrt{1+|\nabla u|^2}\,
@@ -32,7 +48,9 @@ $$
 \forall u\in H^1(\Omega), J(u)=\int\limits_\Omega L(x, u(x), \nabla u(x))
 \,\mathrm{d}\lambda
 $$
-Le probl\`eme de surface minimale est le suivant:
+Ainsi le probl\`eme de surface minimale se formule: \\
+
+Trouver $u\in H^1(\Omega)$ tel que:
 \begin{equation}
 \begin{cases}
 \min\limits_{u\in H^1(\Omega)}J(u) \\
@@ -51,9 +69,41 @@ Et:
 $$
 \langle dJ(u), v\rangle = 0
 $$
+La surface minimale est l'ensemble de point
+ $\begin{pmatrix}x \\ y \\ f(x, y)\end{pmatrix}$ telle que l'\'equation locale
+ d'Euler-Lagrange est v\'erifi\'ee: \\
+\begin{equation}
+\frac{\partial^2f}{\partial x^2}\left(1+\left(\frac{\partial f}{\partial x}\right)^2\right)-2\frac{\partial f}{\partial x}\frac{\partial f}{\partial y}\frac{\partial^2f}{\partial xy}+\frac{\partial^2f}{\partial y^2}\left(1+\left(\frac{\partial f}{\partial y}\right)^2\right) = 0
+\end{equation}
 \newpage
 \section{Probl\`eme de surface minimale en dimension finie}
-TODO: formules
+On r\'esout le probl\`eme de surface minimale en dimension finie. Un maillage
+ sera g\'en\'er\'e avec FreeFem++, la r\'esolution sera faite en C++ en
+ utilisant Eigen3 pour manipuler et calculer la solution, gnuplot servira \`a
+ afficher la solution.
+
+Le maillage est d\'ecrit dans les fichiers \textit{mesh.edp} et
+ \textit{catenoide.edp}. Apr\`es g\'en\'eration du maillage avec FreeFem++,
+ le maillage est charg\'e dans une classe \textit{Mesh}.
+
+De la formule suivant, on a une matrice $A$:
+$$
+A_{i,j}=\sum\limits_{K}\frac{DN^K(\phi_j)\cdot DN^K(\phi_i)}{\|N^K(w)\|},
+$$
+ o\`u $\phi_i, \phi_j$ sont des vecteurs qui valent 1 respectivement au sommet
+ $i,j$ et z\'ero ailleurs.
+
+La fonction \textit{prod} permet de faire le produit entre la matrice $A$ et un
+ vecteur $x$. Avec la fonction \textit{prod} un algorithme de gradient
+ est conjugu\'e implement\'e dans \textit{mst\_conjugate\_gradient},
+ l'\'equation $Au=0$ peut \^etre r\'esolu.
+
+Un algorithme de point fixe est fait
+ dans la fonction \textit{main} pour r\'esoudre le probl\`eme de surface
+ minimale en utilisant la fonction \textit{mst\_conjugate\_gradient}.
+
+\newpage
+
 \subsection{Questions}
 Q1) On a que $u^0$ ne change pas \\
 
@@ -78,6 +128,7 @@ $$
 8 & 57 & 0.021824 \\
 9 & 55 & 0.0124709 \\
 10 & 53 & 0.00712846 \\
+\dots & \dots & \dots \\
 30 & 15 & 1.17025e^{-07} \\
 31 & 13 & 6.76511e^{-08} \\
 32 & 12 & 3.91262e^{-08} \\
@@ -94,11 +145,20 @@ $$
 $$
 
 \begin{figure}[h!]
+  %\centering
+  %\includegraphics[width=\linewidth]{catenoide.png}
+  %\caption{La cat\'eno\"ide.}
+  %\label{fig:catenoide}
+
   \centering
-  \includegraphics[width=\linewidth]{catenoide.png}
-  \caption{La cat\'eno\"ide.}
-  \label{fig:catenoide}
+  \subfloat[La cat\'eno\"ide.]{{\includegraphics[width=\linewidth]{catenoide.png} }}%
+  %\qquad
+    \\
+  \subfloat[fig:cos\_cos]{{\includegraphics[width=\linewidth]{cos_cos.png} }}
+  \caption{Les surfaces}
+  \label{fig:example}
 \end{figure}
+\clearpage
 
 \newpage
 
@@ -135,15 +195,42 @@ $$
 \end{array}
 $$
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\linewidth]{cos_cos.png}
-  \caption{$(x, y)\mapsto\cos(x)\cos(y)$.}
-  \label{fig:cos_cos}
-\end{figure}
+%\begin{figure}[h!]
+%  \centering
+%  \includegraphics[width=\linewidth]{cos_cos.png}
+%  \caption{$(x, y)\mapsto\cos(x)\cos(y)$.}
+%  \label{fig:cos_cos}
+%\end{figure}
+%\clearpage
+
+Q6) Quelques cas \\
+Voir Figure 1 en haut.
 
 \newpage
 
-Q6) Quelques cas
+\section{Conclusion}
+Il y a plusieurs implementation possible pour r\'esoudre le probl\`eme de
+ surface minimale en dimension finie. Des id\'ees possibles pour am\'eliorer la
+ performance seraient de conditionn\'ee la matrice $A$, faire de des calculs
+ en parall\`ele en particulier pour la multiplication matrice-vecteur.
+
+\newpage
+
+\begin{thebibliography}{9}
+
+%\bibitem{lamport94}
+%  Leslie Lamport,
+%  \textit{\LaTeX: a document preparation system},
+%  Addison Wesley, Massachusetts,
+%  2nd edition,
+%  1994.
+
+\bibitem{freefem++-doc}
+  \url{https://github.com/FreeFem/FreeFem-doc-pdf/raw/master/freefem\%2B\%2Bdoc.pdf},
+
+\bibitem{Eigen-doc}
+  \url{http://eigen.tuxfamily.org/dox/}
+\end{thebibliography}
+
 \end{document}
 
