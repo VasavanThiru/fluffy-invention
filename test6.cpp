@@ -3,11 +3,11 @@
 #include "min_surface_tools.h"
 #include "mesh.h"
 
-// Q4, Q5) Affichage des valeurs
+// Q6) cas exotique, et d'autres
 
 double g(double x, double y)
 {
-    //*
+    /*
     if(std::abs(x + M_PI) < 0.01 && std::abs(y + M_PI) < 0.01)
         return 1.;
     else
@@ -29,6 +29,7 @@ double g(double x, double y)
     else
         return 1.3169578969248166;
     // */
+    return std::sin(4. * std::sqrt(x * x + y * y) * std::atan2(x, y));
 }
 
 int main(int argc, char *argv[])
@@ -36,7 +37,7 @@ int main(int argc, char *argv[])
     bool initial = false;
     if(argc > 1)
         initial = atoi(argv[1]) > 0;
-    std::string filename("mesh.msh");
+    std::string filename("catenoide.msh");
     Mesh m(filename);
     double eps = 1e-10; // precision of the solution
     int kiter = 1 << 10; // maximun number of iteration
@@ -60,15 +61,20 @@ int main(int argc, char *argv[])
     while(!initial && k < kiter && (u_0 - u).norm() >= eps) {
         u_0 = u;
         l = mst_conjugated_gradient(u, u_0, kiter, 1e-9, m, on_boundary); // u = A^(-1)g
-        //prod(r, u, u, m, on_boundary, true); // r = A*u-b
-        //std::cout << k << " " << l << " " << (u_0 - u).norm() << std::endl;
-        std::cout << "Iteration " << k << std::endl
-            << "Conjugate gradient's iteration " << l << std::endl
-            //<< "" << r.norm() << " "
-            << "Consecutive error " << (u_0 - u).norm() << std::endl;
         k++;
     }
 
+    /* Print for gnuplot
+    for(k = 0; k < num_ver; k++)
+        std::cout << m.vertex(k) << " " << u(k) << std::endl;
+    // */
+    //* Print for the Python script
+    std::cout << m.vertices_count() << " " << m.triangles_count() << std::endl;
+    for(k = 0; k < m.vertices_count(); k++)
+        std::cout << m.vertex(k) << " " << u(k) << std::endl;
+    for(k = 0; k < m.triangles_count(); k++)
+        std::cout << m.triangle(k) << std::endl;
+    // */
     return 0;
 }
 

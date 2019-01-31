@@ -1,6 +1,6 @@
 int N = 64;
 border C0(t=0, 2 * pi) {x=2 * cos(t); y=2 * sin(t);}
 border C1(t=0, 2 * pi) {x=cos(2 * pi - t); y=sin(2 * pi - t);}
-mesh Sh = buildmesh(C0(N) + C1(N));
+mesh Sh = buildmesh(C0(2 * N) + C1(N));
 plot(Sh);
 savemesh(Sh, "catenoide.msh");

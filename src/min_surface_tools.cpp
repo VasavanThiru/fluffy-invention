@@ -17,25 +17,25 @@ void on_one_tri
 
     //std::cout << t << std::endl;
     //for(int k = 0; k < 3; k++)
-    //    std::cout << m.coordinate(t[k]) << std::endl;
+    //    std::cout << m.vertex(t[k]) << std::endl;
 
-    c_0 = Eigen::Matrix<double, 2, 1>(m.coordinate(t[2]));
-    c_1 = Eigen::Matrix<double, 2, 1>(m.coordinate(t[1]));
+    c_0 = Eigen::Matrix<double, 2, 1>(m.vertex(t[2]));
+    c_1 = Eigen::Matrix<double, 2, 1>(m.vertex(t[1]));
     n[0] = c_0 - c_1;
 
-    c_0 = Eigen::Matrix<double, 2, 1>(m.coordinate(t[0]));
-    c_1 = Eigen::Matrix<double, 2, 1>(m.coordinate(t[2]));
+    c_0 = Eigen::Matrix<double, 2, 1>(m.vertex(t[0]));
+    c_1 = Eigen::Matrix<double, 2, 1>(m.vertex(t[2]));
     n[1] = c_0 - c_1;
 
-    c_0 = Eigen::Matrix<double, 2, 1>(m.coordinate(t[1]));
-    c_1 = Eigen::Matrix<double, 2, 1>(m.coordinate(t[0]));
+    c_0 = Eigen::Matrix<double, 2, 1>(m.vertex(t[1]));
+    c_1 = Eigen::Matrix<double, 2, 1>(m.vertex(t[0]));
     n[2] = c_0 - c_1;
 
     //for(int k = 0; k < 3; k++)
     //    std::cout << "n_" << k << ": \n" << n[k] << std::endl;
 
-    u.block<2, 1>(0, 0) = (m.coordinate(t[1]) - m.coordinate(t[0])).matrix();
-    v.block<2, 1>(0, 0) = (m.coordinate(t[2]) - m.coordinate(t[0])).matrix();
+    u.block<2, 1>(0, 0) = (m.vertex(t[1]) - m.vertex(t[0])).matrix();
+    v.block<2, 1>(0, 0) = (m.vertex(t[2]) - m.vertex(t[0])).matrix();
     u(2) = u_0(t[1]) - u_0(t[0]);
     v(2) = u_0(t[2]) - u_0(t[0]);
 

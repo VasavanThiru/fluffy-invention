@@ -7,3 +7,15 @@
 
 # to plot run
 gnuplot plot
+
+# to plot and compute the area of the catenoid with Python
+./bin/main > py_u.dat
+sh ./clean.sh py_u.dat
+python main.py py_u.dat
+
+# if Eigen3 is missing do:
+# git clone https://github.com/eigenteam/eigen-git-mirror <directory>
+# mkdir -p include/eigen3
+# cp -r <directory>/Eigen include/eigen3
+
+# if it doesn't work, please report the bug

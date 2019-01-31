@@ -7,9 +7,9 @@
 #include <fstream>
 #include <eigen3/Eigen/Dense>
 
-typedef Eigen::Array<double, Eigen::Dynamic, 2> Coordinates;
+typedef Eigen::Array<double, Eigen::Dynamic, 2> Vertices;
 typedef Eigen::Array<int, Eigen::Dynamic, 3> Triangles;
-typedef Eigen::DenseBase<Coordinates>::FixedBlockXpr<1, 2>::Type Coordinate;
+typedef Eigen::DenseBase<Vertices>::FixedBlockXpr<1, 2>::Type Vertex;
 typedef Eigen::DenseBase<Triangles>::FixedBlockXpr<1, 3>::Type Triangle;
 
 class Mesh
@@ -17,14 +17,13 @@ class Mesh
     public:
     Mesh();
     Mesh(const std::string &name);
-    Coordinate coordinate(int i);
+    Vertex vertex(int i);
     Triangle triangle(int i);
     int vertices_count() const;
     int triangles_count() const;
     std::set<int> boundary() const;
-    int order_border();
     private:
-    Coordinates coordinates;
+    Vertices vertices;
     Triangles triangles;
 };
 

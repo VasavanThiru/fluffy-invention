@@ -15,7 +15,7 @@ SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(subst $(SRCDIR)/,$(OBJDIR)/, $(subst .cpp,.o, $(SRCS)))
 
 # Define here your main source files separated by spaces (without suffix!)
-EXEC = main test_mesh info
+EXEC = main test_mesh info test5 test6 catenoide
 
 #Phony = do not represent a file
 #.PHONY: all

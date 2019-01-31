@@ -17,16 +17,16 @@ def read_mesh(filename):
     data = data.split('\n')
     del data[-1]
     tmp = data[0].split(' ')
-    num_cor = int(tmp[0])
+    num_ver = int(tmp[0])
     num_tri = int(tmp[1])
-    array = [np.empty([int(num_cor), 3], dtype=np.float32),
+    array = [np.empty([int(num_ver), 3], dtype=np.float32),
              np.empty([int(num_tri), 3], dtype=np.int)]
-    for i in range(num_cor):
+    for i in range(num_ver):
         a = data[i + 1].split(' ')
         for j in range(3):
             array[0][i][j] = float(a[j])
     for i in range(num_tri):
-        a = data[i + num_cor + 1].split(' ')
+        a = data[i + num_ver + 1].split(' ')
         for j in range(3):
             array[1][i][j] = int(a[j])
     #array[1] -= 1
@@ -78,6 +78,6 @@ if __name__ == '__main__':
     print('area', a1)
     print('diff', a1 - a0)
     print(np.sqrt(np.sum((z - array[0][:,2])**2)))
-    surface(array[0][:,0], array[0][:,1], [z], array[1])
-    #surface(array[0][:,0], array[0][:,1], [array[0][:,2]], array[1])
+    #surface(array[0][:,0], array[0][:,1], [z], array[1])
+    surface(array[0][:,0], array[0][:,1], [array[0][:,2]], array[1])
     #surface(array[0][:,0], array[0][:,1], [z - array[0][:,2]], array[1])

@@ -69,13 +69,20 @@ Et:
 $$
 \langle dJ(u), v\rangle = 0
 $$
+
+\newpage
+
+Le probl\`eme de surface minimale peut \'egalement \^etre d\'ecrit d'une autre
+ fa\c{c}on comme:
 La surface minimale est l'ensemble de point
  $\begin{pmatrix}x \\ y \\ f(x, y)\end{pmatrix}$ telle que l'\'equation locale
  d'Euler-Lagrange est v\'erifi\'ee: \\
 \begin{equation}
 \frac{\partial^2f}{\partial x^2}\left(1+\left(\frac{\partial f}{\partial x}\right)^2\right)-2\frac{\partial f}{\partial x}\frac{\partial f}{\partial y}\frac{\partial^2f}{\partial xy}+\frac{\partial^2f}{\partial y^2}\left(1+\left(\frac{\partial f}{\partial y}\right)^2\right) = 0
 \end{equation}
+
 \newpage
+
 \section{Probl\`eme de surface minimale en dimension finie}
 On r\'esout le probl\`eme de surface minimale en dimension finie. Un maillage
  sera g\'en\'er\'e avec FreeFem++, la r\'esolution sera faite en C++ en
@@ -91,10 +98,10 @@ $$
 A_{i,j}=\sum\limits_{K}\frac{DN^K(\phi_j)\cdot DN^K(\phi_i)}{\|N^K(w)\|},
 $$
  o\`u $\phi_i, \phi_j$ sont des vecteurs qui valent 1 respectivement au sommet
- $i,j$ et z\'ero ailleurs.
+ $i,j$ du maillage et z\'ero ailleurs.
 
 La fonction \textit{prod} permet de faire le produit entre la matrice $A$ et un
- vecteur $x$. Avec la fonction \textit{prod} un algorithme de gradient
+ vecteur $x$. Avec la fonction \textit{prod}, un algorithme de gradient
  est conjugu\'e implement\'e dans \textit{mst\_conjugate\_gradient},
  l'\'equation $Au=0$ peut \^etre r\'esolu.
 
@@ -107,9 +114,9 @@ Un algorithme de point fixe est fait
 \subsection{Questions}
 Q1) On a que $u^0$ ne change pas \\
 
-Q3) Voir code: test3.cpp \\
+Q3) Voir code: main.cpp \\
 
-Q4) Pour la cat\'eno\"ide, on a bien voici les valeurs: \\
+Q4) Pour la cat\'eno\"ide, on a bien convergence, voici les valeurs: \\
 
 $$
 \begin{array}{|c|c|c|}
@@ -154,7 +161,8 @@ $$
   \subfloat[La cat\'eno\"ide.]{{\includegraphics[width=\linewidth]{catenoide.png} }}%
   %\qquad
     \\
-  \subfloat[fig:cos\_cos]{{\includegraphics[width=\linewidth]{cos_cos.png} }}
+  \subfloat[$(x, y)\mapsto\cos(x)\cos(y)$]
+    {{\includegraphics[width=\linewidth]{cos_cos.png} }}
   \caption{Les surfaces}
   \label{fig:example}
 \end{figure}
@@ -204,15 +212,27 @@ $$
 %\clearpage
 
 Q6) Quelques cas \\
-Voir Figure 1 en haut.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\linewidth]{exotique.png}
+  \caption{$(r, \theta)\mapsto\sin(4r\theta)$.}
+  \label{fig:exotique}
+\end{figure}
+\clearpage
 
 \newpage
 
 \section{Conclusion}
 Il y a plusieurs implementation possible pour r\'esoudre le probl\`eme de
- surface minimale en dimension finie. Des id\'ees possibles pour am\'eliorer la
- performance seraient de conditionn\'ee la matrice $A$, faire de des calculs
- en parall\`ele en particulier pour la multiplication matrice-vecteur.
+ surface minimale en dimension finie.
+
+Des id\'ees possibles pour am\'eliorer la performance seraient de conditionn\'ee
+ la matrice $A$, faire de des calculs en parall\`ele en particulier pour la
+ multiplication matrice-vecteur.
+
+D'autres m\'ethodes pour la r\'esolution de syst\`emes num\'eriques peuvent
+ \^etre utilis\'ees comme la factorisation LU, GMRes.
 
 \newpage
 
